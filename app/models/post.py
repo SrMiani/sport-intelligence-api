@@ -26,7 +26,8 @@ class Post(Base):
     content_type = Column(Enum(ContentType), default=ContentType.text)
     
     # El Loading Score — empieza en 0, lo calcularemos después
-    loading_score = Column(Integer, default=0, nullable= False)
+    likes_score = Column(Integer, default=0, nullable=False)
+    superlikes_score = Column(Integer, default=0, nullable=False)
     
     # Cuándo se creó
     created_at   = Column(DateTime, default=datetime.utcnow)

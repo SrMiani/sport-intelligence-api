@@ -21,6 +21,7 @@ class User(Base):
     bio          = Column(String, default="")
     is_active    = Column(Boolean, default=True)
     created_at   = Column(DateTime, default=datetime.utcnow)
+    superlikes_available = Column(Integer, default=1)  # Número de superlikes disponibles
 
     # Relación: un usuario puede tener muchos posts
     # Esto nos permite hacer user.posts y obtener todos sus posts
