@@ -8,8 +8,8 @@ from sqlalchemy.orm import sessionmaker
 
 # La "dirección" de nuestra base de datos. 
 # sqlite:/// significa que es un archivo local.
-# loading.db es el archivo que se creará en la carpeta del proyecto.
-DATABASE_URL = "sqlite:///./loading.db"
+# sport_intelligence.db es el archivo que se creará en la carpeta del proyecto.
+DATABASE_URL = "sqlite:///./sport_intelligence.db"
 
 # El motor — es la conexión real a la base de datos
 # check_same_thread=False es necesario para SQLite con FastAPI

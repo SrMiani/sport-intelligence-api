@@ -25,7 +25,7 @@ class User(Base):
 
     # Relación: un usuario puede tener muchos posts
     # Esto nos permite hacer user.posts y obtener todos sus posts
-    posts = relationship("Post", back_populates="author")
+    
 
     def __repr__(self):
         return f"<User {self.username}>"
