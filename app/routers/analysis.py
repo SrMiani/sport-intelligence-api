@@ -70,10 +70,20 @@ def create_analysis(
     # Extraemos el texto de la respuesta
     result_text = response.choices[0].message.content
 
+    # Limpiamos el texto por si OpenAI añade markdown
+    result_text = result_text.strip()
+    if result_text.startswith("```"):
+        result_text = result_text.split("```")[1]
+    if result_text.startswith("json"):
+        result_text = result_text[4:]
+    result_text = result_text.strip()
+
     # Convertimos el JSON de texto a diccionario Python
     import json
     result = json.loads(result_text)
 
+    if result["score"] > 80:
+        result["strengths"] = "ELITE - " + result["strengths"]
     # Guardamos en la base de datos
     analysis = Analysis(
         user_id=current_user.id,
