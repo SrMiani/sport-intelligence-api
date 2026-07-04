@@ -1,175 +1,183 @@
-Sport Intelligence API ⚡
+# Sport Intelligence API ⚡
+
+> *Análisis deportivo con IA (OPENAI).*
+
+---
+
+## Qué hace?
 
 
-Análisis de rendimiento deportivo con IA.
-
-
-
-
-¿Qué hace?
-
-Sport Intelligence API analiza el rendimiento deportivo usando IA. Describes tu actuación en texto — o subes contenido multimedia — y la IA evalúa tu técnica, detecta fortalezas y áreas de mejora, y te devuelve recomendaciones concretas para mejorar junto con una puntuación de rendimiento.
-
-
-Stack
-
-
-Python 3.12
-FastAPI — framework web moderno y de alto rendimiento
-OpenAI GPT-4o-mini — motor de análisis con IA
-SQLAlchemy — ORM para gestión de base de datos
-SQLite → PostgreSQL (producción)
-JWT + bcrypt — autenticación segura
-Uvicorn — servidor ASGI
+Sport Intelligence API analiza el rendimiento utilizando IA. Introduces contenido multimedia o un input de texto describiendo una actividad en concreto, la IA evalúa la tecnica y te da una puntuación en base a varios criterios, puntos fuertes y debilidades, técnica y te devuelve diferentes recomendaciones para mejorar.
 
 
 
-Estructura del proyecto
+---
 
+## Stack
+
+- **Python 3.12**
+- **FastAPI** — high-performance async API framework
+- **OpenAI GPT-4o-mini** — AI analysis engine
+- **SQLAlchemy** — ORM for database management
+- **SQLite** → PostgreSQL (production)
+- **JWT + bcrypt** — secure authentication
+- **Uvicorn** — ASGI server
+
+---
+
+## Project Structure
+
+```
 sport-intelligence-api/
-├── main.py                  # Punto de entrada
+├── main.py                  # Entry point
 └── app/
     ├── core/
-    │   ├── database.py      # Conexión y sesión de base de datos
-    │   ├── security.py      # JWT y hash de contraseñas
-    │   └── config.py        # Variables de entorno
+    │   ├── database.py      # DB connection and session
+    │   ├── security.py      # JWT and password hashing
+    │   └── config.py        # Environment variables
     ├── models/
-    │   ├── user.py          # Modelo de usuario
-    │   └── analysis.py      # Modelo de análisis + Performance Score
+    │   ├── user.py          # User model
+    │   └── analysis.py      # Analysis model + Performance Score
     └── routers/
-        ├── auth.py          # Registro e inicio de sesión
-        └── analysis.py      # Endpoints de análisis + integración OpenAI
+        ├── auth.py          # Register and login
+        └── analysis.py      # Analysis endpoints + OpenAI integration
+```
 
+---
 
-Funcionalidades
+## Features
 
-Autenticación
+### Authentication
+- User registration with bcrypt password hashing
+- JWT-based login (24h token expiry)
+- Protected routes via OAuth2 Bearer token
 
+### AI Performance Analysis
+- Describe your performance in natural language
+- Select your sport and discipline
+- Get instant AI-powered feedback including:
+  - **Performance Score** (0-100)
+  - **Strengths** detected in your performance
+  - **Areas for improvement**
+  - **Concrete recommendations** to get better
 
-Registro de usuarios con hash de contraseña bcrypt
-Login con JWT (token de 24h de duración)
-Rutas protegidas mediante OAuth2 Bearer token
+### Performance History
+- Every analysis is stored with timestamp
+- Track your progression over time
+- Compare scores across sessions
 
+---
 
-Análisis de rendimiento con IA
+## Getting Started
 
-
-Describe tu actuación en lenguaje natural
-Selecciona tu deporte y disciplina
-Recibe feedback instantáneo con IA:
-
-Performance Score (0-100)
-Fortalezas detectadas en tu actuación
-Áreas de mejora
-Recomendaciones concretas para mejorar
-
-
-
-
-
-Historial de rendimiento
-
-
-Cada análisis se guarda con marca de tiempo
-Seguimiento de tu progresión a lo largo del tiempo
-Comparación de scores entre sesiones
-
-
-
-Cómo empezar
-
-1. Clona el repositorio
-
-bashgit clone https://github.com/SrMiani/sport-intelligence-api.git
+**1. Clone the repository**
+```bash
+git clone https://github.com/SrMiani/sport-intelligence-api.git
 cd sport-intelligence-api
+```
 
-2. Crea y activa el entorno virtual
-
-bashpython -m venv venv
+**2. Create and activate virtual environment**
+```bash
+python -m venv venv
 venv\Scripts\activate       # Windows
 source venv/bin/activate    # Mac/Linux
+```
 
-3. Instala las dependencias
+**3. Install dependencies**
+```bash
+pip install fastapi uvicorn sqlalchemy pyjwt "passlib[bcrypt]" python-multipart bcrypt==4.0.1 email-validator openai python-dotenv
+```
 
-bashpip install fastapi uvicorn sqlalchemy pyjwt "passlib[bcrypt]" python-multipart bcrypt==4.0.1 email-validator openai python-dotenv
+**4. Set up environment variables**
 
-4. Configura las variables de entorno
+Create a `.env` file in the root directory:
+```
+OPENAI_API_KEY=your_openai_api_key_here
+```
 
-Crea un archivo .env en la raíz del proyecto:
+**5. Run the server**
+```bash
+uvicorn main:app --reload
+```
 
-OPENAI_API_KEY=tu_api_key_de_openai
-
-5. Arranca el servidor
-
-bashuvicorn main:app --reload
-
-6. Abre la documentación
-
+**6. Open the docs**
+```
 http://localhost:8000/docs
+```
 
+---
 
-Endpoints
+## API Endpoints
 
-MétodoEndpointAuthDescripciónPOST/auth/register❌Crear una cuenta nuevaPOST/auth/login❌Iniciar sesión y recibir token JWTPOST/analysis✅Analizar una actuación deportiva
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| POST | `/auth/register` | ❌ | Create a new account |
+| POST | `/auth/login` | ❌ | Login and receive JWT token |
+| POST | `/analysis` | ✅ | Analyze a sport performance |
 
+---
 
-Ejemplo de petición
+## Example Request
 
-jsonPOST /analysis
+```json
+POST /analysis
 Authorization: Bearer <token>
 
 {
-    "sport": "fútbol",
-    "discipline": "portero",
-    "input_text": "Hoy entrené 1 hora. Mis reflejos estuvieron bien pero me costó en los balones aéreos y salir a despejar."
+    "sport": "football",
+    "discipline": "goalkeeper",
+    "input_text": "Trained for 1 hour today. My reflexes were good but I struggled with aerial balls and coming out to clear."
 }
+```
 
-Ejemplo de respuesta
+## Example Response
 
-json{
+```json
+{
     "id": 1,
-    "sport": "fútbol",
-    "discipline": "portero",
+    "sport": "football",
+    "discipline": "goalkeeper",
     "score": 70,
-    "strengths": "Buenos reflejos durante el entrenamiento.",
-    "improvements": "Dificultades con los balones aéreos y al salir a despejar.",
-    "recommendations": "Practicar ejercicios de salto y posicionamiento para mejorar en balones aéreos, y simular despejes desde diferentes ángulos de ataque.",
+    "strengths": "Good reflexes during training.",
+    "improvements": "Difficulties with aerial balls and coming out to clear.",
+    "recommendations": "Practice jumping and positioning exercises to improve on aerial balls, and simulate clearances from different attack angles.",
     "created_at": "2026-07-01T23:48:39.009543"
 }
+```
 
+---
 
-Roadmap
+## Roadmap
 
+- [x] User authentication (JWT)
+- [x] AI performance analysis (text)
+- [x] Performance Score (0-100)
+- [x] Analysis history per user
+- [ ] Video upload and frame analysis (OpenAI Vision)
+- [ ] Sport-specific evaluation criteria
+- [ ] Progress charts and visualizations
+- [ ] React dashboard
+- [ ] Docker containerization
+- [ ] CI/CD with GitHub Actions
+- [ ] GCP deployment
 
- Autenticación de usuarios (JWT)
- Análisis de rendimiento con IA (texto)
- Performance Score (0-100)
- Historial de análisis por usuario
- Subida de vídeo y análisis por frames (OpenAI Vision)
- Criterios de evaluación específicos por deporte
- Gráficas de progresión
- Dashboard en React
- Containerización con Docker
- CI/CD con GitHub Actions
- Despliegue en GCP
+---
 
+## Use Cases
 
+- **Amateur athletes** who want professional-level feedback without a coach
+- **Personal trainers** who need to give remote feedback to multiple clients
+- **Sports academies** that want to scale individual feedback
+- **Fitness apps** looking to add an AI analysis layer via API
 
-Casos de uso
+---
 
+## Author
 
-Atletas amateur que quieren feedback de nivel profesional sin necesidad de entrenador
-Entrenadores personales que necesitan dar feedback remoto a múltiples clientes
-Academias deportivas que quieren escalar el feedback individualizado
-Apps de fitness que buscan añadir una capa de análisis con IA mediante API
+**Sergi Miani** — AI Engineer in progress, building at the intersection of sport, data and artificial intelligence.
 
+[GitHub](https://github.com/SrMiani)
 
+---
 
-Autor
-
-Sergi Miani — AI Engineer, construyendo en la intersección entre deporte, datos e inteligencia artificial.
-
-GitHub
-
-
-Construido con FastAPI + OpenAI. Parte de un portfolio de herramientas con IA aplicada
+*Built with FastAPI + OpenAI. Part of a growing portfolio of AI-powered tools.*
