@@ -7,6 +7,7 @@
 ## What it does
 
 Sport Intelligence API analyzes athletic performance using AI. You describe what happened during your training or match — the AI evaluates your technique, detects strengths and weaknesses, and gives you concrete recommendations to improve.
+It uses OPENAI API
 
 No coach needed. No expensive equipment. Just describe what you did, and get professional-level feedback instantly.
 
