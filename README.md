@@ -172,4 +172,4 @@ Sergi Miani — AI Engineer, construyendo en la intersección entre deporte, dat
 GitHub
 
 
-Construido con FastAPI + OpenAI. Parte de un portfolio de herramientas con IA aplicada.
+Construido con FastAPI + OpenAI. Parte de un portfolio de herramientas con IA aplicada
