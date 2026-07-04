@@ -1,15 +1,15 @@
 # Sport Intelligence API ⚡
 
-> *AI-powered sport performance analysis. Describe your performance, get instant feedback.*
+> *Análisis deportivo con IA (OPENAI).*
 
 ---
 
-## What it does
+## Qué hace?
 
-Sport Intelligence API analyzes athletic performance using AI. You describe what happened during your training or match — the AI evaluates your technique, detects strengths and weaknesses, and gives you concrete recommendations to improve.
-It uses OPENAI API
 
-No coach needed. No expensive equipment. Just describe what you did, and get professional-level feedback instantly.
+Sport Intelligence API analiza el rendimiento utilizando IA. Introduces contenido multimedia o un input de texto describiendo una actividad en concreto, la IA evalúa la tecnica y te da una puntuación en base a varios criterios, puntos fuertes y debilidades, técnica y te devuelve diferentes recomendaciones para mejorar.
+
+
 
 ---
 
